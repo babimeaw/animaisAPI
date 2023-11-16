@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Cats
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button expand="block" (click)="getRandomCat()">Get Random Cat Image</ion-button>
+  <ion-button expand="block" (click)="getTenRandomCats()">Get 10 Random Cats</ion-button>
+  <ion-button expand="block" (click)="getTenBengalCats()">Get 10 Bengal Cats</ion-button>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let cat of cats">
+        <ion-img [src]="cat.url" alt="Cat Image"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
