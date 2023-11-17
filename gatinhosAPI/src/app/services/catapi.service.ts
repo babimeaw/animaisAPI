@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class CatapiService {
   private apiUrl = 'https://api.thecatapi.com/v1/images/search';
-  private apiKey = 'live_vmO0w4xsUPLkM311vlZb5yishSAWPYVsCTC6jT1IgHKdzEo4KPzjjgE2ejeqxQtc';
+  private apiKey = 'live_bMOXQGla6FOzD8pnm3STAUGkjkR1bydrOa3r2kFcu9S5Wqv9eROrNJOl2Wsx2uYT';
+
   constructor(private http: HttpClient) {}
 
   getRandomCat(): Observable<any> {

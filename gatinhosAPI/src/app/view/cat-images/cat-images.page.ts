@@ -1,29 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CatapiService } from 'src/app/services/catapi.service';
+import { IonicSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-cat-images',
   templateUrl: './cat-images.page.html',
   styleUrls: ['./cat-images.page.scss'],
 })
-export class CatImagesPage implements OnInit {
-
+export class CatImagesPage {
   cats: any[] = [];
-  slideOpts = {
-    initialSlide: 0,
-    slidesPerView: 1.5, // Altere o valor para exibir mais ou menos imagens lado a lado
-    centeredSlides: true,
-    speed: 400
-  };
-  constructor(private CatApiService : CatapiService) { }
-
-  ngOnInit() {
-  }
+  currentCat: any;
+  
+  constructor(private catApiService: CatapiService) { }
 
   getRandomCat() {
-    this.CatApiService.getRandomCat().subscribe(
+    this.catApiService.getRandomCat().subscribe(
       (data: any) => {
-        this.cats = data;
+        this.cats = [data];
       },
       (error: any) => {
         console.log(error);
@@ -32,8 +25,8 @@ export class CatImagesPage implements OnInit {
   }
 
   getTenRandomCats() {
-    this.CatApiService.getTenRandomCats().subscribe(
-      (data: any) => {
+    this.catApiService.getTenRandomCats().subscribe(
+      (data: any[]) => {
         this.cats = data;
       },
       (error: any) => {
@@ -43,13 +36,31 @@ export class CatImagesPage implements OnInit {
   }
 
   getTenBengalCats() {
-    this.CatApiService.getTenBengalCats().subscribe(
-      (data: any) => {
+    this.catApiService.getTenBengalCats().subscribe(
+      (data: any[]) => {
+        console.log('a')
         this.cats = data;
       },
       (error: any) => {
+        console.log('b')
         console.log(error);
       }
     );
   }
+
+  nextCat() {
+    const currentIndex = this.cats.indexOf(this.currentCat);
+    if (currentIndex < this.cats.length - 1) {
+      this.currentCat = this.cats[currentIndex + 1];
+    }
+  }
+
+  prevCat() {
+    const currentIndex = this.cats.indexOf(this.currentCat);
+    if (currentIndex > 0) {
+      this.currentCat = this.cats[currentIndex - 1];
+    }
+  }
+
+
 }
